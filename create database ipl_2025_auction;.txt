@@ -1,0 +1,22 @@
+create database ipl_2025_auction;
+use ipl_2025_auction;
+
+select * from ipl_auction;
+
+-- Show the dense rank and the total sold 
+select Players,Team,dense_rank() over (Order by Sold)
+from ipl_auction;
+
+-- count the players and its team
+select count(players), Team
+from ipl_auction
+group by Team;
+
+-- Use the if condition to the check if the sold is 20 then the player sold is expensive other wise it is cheap
+select Players,if(Sold > 20,"Highly Expensive","Less Expensive")
+from ipl_auction;
+
+-- show the average of sold for AR type
+select type,avg(Sold)
+from ipl_auction
+where type= "AR";
